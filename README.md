@@ -200,7 +200,7 @@ https://alphalens-backend-t8ky.onrender.com
 Computer Engineering Student • AI Engineer • Full Stack Developer
 
 - GitHub: https://github.com/techAsmita
-- LinkedIn: https://linkedin.com/in/asmita-roy
+- LinkedIn: https://www.linkedin.com/in/techasmita/
 
 ---
 
