@@ -39,7 +39,7 @@ export function RecentAnalyses() {
                 </span>
               </div>
               <div className="mt-2 flex items-center justify-between text-xs text-muted">
-                <span>{item.time ?? "—"}</span>
+                <span>{item.time || "Just now"}</span>
                 <span className="font-mono-tight text-text">
                   Confidence {item.confidence}%
                 </span>
