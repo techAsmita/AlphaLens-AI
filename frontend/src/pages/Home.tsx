@@ -17,9 +17,13 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 export function Home() {
   const navigate = useNavigate();
 
-  const scrollToPrototype = () => {
-    document.getElementById("intelligence")?.scrollIntoView({ behavior: "smooth" });
-  };
+  const openGithub = () => {
+  window.open(
+    "https://github.com/techAsmita/AlphaLens-AI",
+    "_blank",
+    "noopener,noreferrer"
+  );
+};
 
   return (
     <Section
@@ -76,10 +80,41 @@ export function Home() {
           >
             Start Analysis
           </Button>
-          <Button variant="secondary" onClick={scrollToPrototype}>
-            View Prototype
-          </Button>
+          <Button variant="secondary" onClick={openGithub}>
+  View on GitHub
+</Button>
         </motion.div>
+        <motion.div
+  initial={{ opacity: 0, y: 18 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8, ease: EASE, delay: 0.45 }}
+  className="mt-6 flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2"
+>
+  <span className="text-sm">
+    🏆 Built for STOXRA Hackathon 2026 • React • FastAPI • Gemini
+  </span>
+</motion.div>
+<motion.div
+  initial={{ opacity: 0, y: 18 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8, ease: EASE, delay: 0.55 }}
+  className="mt-10 flex flex-wrap gap-8"
+>
+  <div>
+    <div className="text-3xl font-bold text-primary">98%</div>
+    <div className="text-sm text-muted">AI Confidence</div>
+  </div>
+
+  <div>
+    <div className="text-3xl font-bold text-primary">3</div>
+    <div className="text-sm text-muted">Evidence Sources</div>
+  </div>
+
+  <div>
+    <div className="text-3xl font-bold text-primary">&lt;15s</div>
+    <div className="text-sm text-muted">Average Analysis</div>
+  </div>
+</motion.div>
       </Container>
     </Section>
   );
