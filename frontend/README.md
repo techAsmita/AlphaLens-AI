@@ -1,6 +1,6 @@
 # AlphaLens AI — Frontend
 
-Step 1 foundation: React + Vite + TypeScript + Tailwind CSS + Framer Motion + Lucide React.
+React + Vite + TypeScript + Tailwind CSS + Framer Motion + Lucide React. Talks to the FastAPI backend in `../backend` (`POST /analyze`).
 
 ## Getting started
 
@@ -10,6 +10,8 @@ npm run dev
 ```
 
 Then open the printed local URL (default `http://localhost:5173`).
+
+The backend must be running at `http://localhost:8000` (override with `VITE_API_BASE_URL` — copy `.env.example` to `.env`).
 
 ## Stack
 
@@ -24,11 +26,16 @@ Then open the printed local URL (default `http://localhost:5173`).
 ```
 src/
   components/
-    layout/   Navbar, GridBackground, and other page-shell pieces
-    ui/       Reusable Container, Section, Button, Card primitives
-  pages/      Top-level route views (Home is the Step 1 foundation screen)
-  hooks/      Shared hooks (e.g. useReducedMotion)
-  lib/        Utilities (e.g. cn class helper)
+    landing/    Sections of the landing page
+    analysis/   Watchlist, workspace panel, recent analyses
+    dashboard/  Signal cards, evidence panel, timeline (+ loading skeletons)
+    layout/     GridBackground, LeftNav, Ticker, SystemPanel, CursorGlow
+    ui/         Reusable Container, Section, Button, Card primitives
+  pages/      Routes: Landing (/), Analysis (/analysis), AnalysisProcess (/analysis/process), Dashboard (/dashboard)
+  context/    CompanyContext — selected company + analysis result
+  services/   intelligence.ts — API client for POST /analyze
+  hooks/      Shared hooks (e.g. useReducedMotion, useClock)
+  lib/        Utilities and data (companies, signals, process steps)
   styles/     Reserved for additional stylesheets beyond index.css
   assets/     Static assets imported by components
 ```

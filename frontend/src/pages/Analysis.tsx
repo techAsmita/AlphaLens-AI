@@ -17,7 +17,7 @@ export function Analysis() {
   const selectedCompany = COMPANIES.find((c) => c.ticker === selectedTicker) ?? null;
 
   return (
-    <div className="relative min-h-screen pb-16">
+    <div className="relative min-h-screen pb-6">
       <AnalysisHeader />
 
       <motion.div

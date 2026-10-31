@@ -11,7 +11,7 @@
 
 <p align="center">
 
-![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=white)
+![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3.11-3776AB?style=for-the-badge&logo=python&logoColor=white)
@@ -35,6 +35,8 @@
 Instead of summarizing information, AlphaLens detects hidden market signals, assigns confidence scores, highlights supporting evidence, and presents everything through an interactive intelligence dashboard.
 
 Built for **STOXRA Hackathon 2026 – FinTech Track**.
+
+> **Current status:** the full product flow — watchlist → analysis pipeline → intelligence dashboard — runs end to end through the FastAPI backend. Analysis reports are currently generated from curated sample data for each supported company (INFY, TCS, RELIANCE, HDFCBANK, ICICIBANK, NVDA, AAPL, MSFT). The Gemini integration (`backend/app/services/gemini_service.py`) is built and ready to plug into the pipeline — see the [Roadmap](#-roadmap).
 
 ---
 
@@ -78,9 +80,9 @@ Built for **STOXRA Hackathon 2026 – FinTech Track**.
 
 | Category | Technologies |
 |-----------|--------------|
-| Frontend | React 19, TypeScript, Vite, Tailwind CSS, Framer Motion |
+| Frontend | React 18, TypeScript, Vite, Tailwind CSS, Framer Motion |
 | Backend | FastAPI, Python 3.11, Pydantic |
-| AI | Google Gemini |
+| AI | Google Gemini (integration module ready; reports currently use curated sample data) |
 | Deployment | Vercel, Render |
 | Version Control | Git & GitHub |
 
@@ -93,12 +95,21 @@ AlphaLens-AI
 │
 ├── backend
 │   ├── app
+│   │   ├── api          # /health and /analyze routes
+│   │   ├── services     # transcript, news, analysis, Gemini
+│   │   ├── schemas      # Pydantic models
+│   │   └── utils        # settings, logging
+│   ├── .env.example
 │   ├── requirements.txt
 │   └── runtime.txt
 │
 ├── frontend
 │   ├── src
+│   │   ├── pages        # Landing, Analysis, AnalysisProcess, Dashboard
+│   │   ├── components   # landing, analysis, dashboard, layout, ui
+│   │   └── services     # API client for POST /analyze
 │   ├── public
+│   ├── .env.example
 │   └── package.json
 │
 ├── screenshot
@@ -121,16 +132,20 @@ cd AlphaLens-AI
 
 ---
 
+> **Requires Python 3.11+ and Node.js 18+.** Run the backend and frontend in two separate terminals.
+
 ## Backend Setup
 
 ```bash
 cd backend
 
-python -m venv .venv
+python3.11 -m venv .venv
 
-source .venv/bin/activate      # macOS/Linux
+source .venv/bin/activate      # Windows: .venv\Scripts\activate
 
 pip install -r requirements.txt
+
+cp .env.example .env           # optional — the defaults work out of the box
 
 uvicorn app.main:app --reload
 ```
@@ -140,6 +155,8 @@ Backend runs at
 ```
 http://localhost:8000
 ```
+
+API docs: `http://localhost:8000/docs` · Health check: `http://localhost:8000/health`
 
 ---
 
@@ -158,6 +175,10 @@ Frontend runs at
 ```
 http://localhost:5173
 ```
+
+Open the app, click **Start Analysis**, pick a company from the watchlist, and run the analysis to see the intelligence dashboard.
+
+> The backend only accepts requests from `localhost:5173` by default (see `ALLOWED_ORIGINS` in `backend/.env.example`), so use `npm run dev` rather than `npm run preview`, or add the preview port to that list.
 
 ---
 
@@ -184,6 +205,7 @@ https://alphalens-backend-t8ky.onrender.com
 
 # 🔮 Roadmap
 
+- 🧠 Wire Gemini into the analysis pipeline (replace curated sample signals)
 - 📈 Live Market Data
 - 🤖 AI Investment Copilot
 - 📊 Portfolio Monitoring
