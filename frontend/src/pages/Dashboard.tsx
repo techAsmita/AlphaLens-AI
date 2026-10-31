@@ -100,7 +100,7 @@ export function Dashboard() {
   const showSkeleton = isLoading || !report || !selectedSignal || !selectedEvidence;
 
   return (
-    <div className="relative min-h-screen pb-4">
+    <div className="relative flex min-h-screen flex-col">
       <DashboardHeader />
 
       <motion.div
@@ -172,7 +172,8 @@ export function Dashboard() {
         </Container>
       </motion.div>
 
-      <div className="mt-10">
+      {/* mt-auto keeps the timeline at the bottom of the screen on tall windows */}
+      <div className="mt-auto pt-10">
         {showSkeleton || !report ? (
           <DashboardTimelineSkeleton />
         ) : (
